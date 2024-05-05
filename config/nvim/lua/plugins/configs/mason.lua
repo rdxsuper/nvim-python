@@ -1,7 +1,8 @@
 local options = {
   ensure_installed = { "lua-language-server" }, -- not an option from mason.nvim
 
-  PATH = "skip",
+  --PATH = "skip",
+  PATH = "prepend", --https://github.com/williamboman/nvim-lsp-installer/discussions/509#discussioncomment-4009039
 
   ui = {
     icons = {
