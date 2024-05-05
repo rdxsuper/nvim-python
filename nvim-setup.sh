@@ -7,11 +7,13 @@ echo ""
 NVIM_VER=v0.9.5
 SCRIPT_LOCATION=${PWD}
 
-# NVIM Version Check 
-CURRENT_NVIM_VER=$(nvim --version | head -1 | awk '{print $2}')
-if [[ "${CURRENT_NVIM_VER}" != "${NVIM_VER}" ]]; then
-  echo "This script is tested only on Neovim v0.9.5 and will only work for this verion."
-  exit 1
+if [[ "$(which nvim)" -ne 0 ]]; then
+  # NVIM Version Check 
+  CURRENT_NVIM_VER=$(nvim --version | head -1 | awk '{print $2}')
+  if [[ "${CURRENT_NVIM_VER}" != "${NVIM_VER}" ]]; then
+    echo "This script is tested only on Neovim v0.9.5 and will only work for this verion."
+    exit 1
+  fi
 fi
 
 # Create Local Opt for User
@@ -23,7 +25,7 @@ else
 fi
 
 # Download Nvim Binary
-if [[ -f "${HOME}/opt/bin/nvim" && "${CURRENT_NVIM_VER}" != "${NVIM_VER}" ]]; then
+if [[ ! -f "${HOME}/opt/bin/nvim" ]]; then
   echo ""
   echo "-------------------------------------------------"
   echo "Downloading latest nvim binary..."
